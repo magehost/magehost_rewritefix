@@ -35,6 +35,15 @@
                     </jeroenvermeulen_rewritefix>
                 </observers>
             </after_reindex_process_catalog_url>
+            <adminhtml_block_html_before>
+                <observers>
+                    <jeroenvermeulen_rewritefix>
+                        <type>singleton</type>
+                        <class>jeroenvermeulen_rewritefix/observer</class>
+                        <method>adminhtmlBlockHtmlBefore</method>
+                    </jeroenvermeulen_rewritefix>
+                </observers>
+            </adminhtml_block_html_before>
         </events>
     </global>
 </config>

@@ -1,0 +1,87 @@
+<_>
+   <form_key>9KipXNCL198NKrEm</form_key>
+   <name>JeroenVermeulen_RewriteFix</name>
+   <channel>community</channel>
+   <version_ids>
+      <version_ids>2</version_ids>
+   </version_ids>
+   <summary>Due to bugs in Magento, once an rewrite URL ends with -[number] you get more and more rewrite URLs to the same target. The number gets higher and higher.</summary>
+   <description>Due to bugs in Magento, once an rewrite URL ends with -[number] you get more and more rewrite URLs to the same target. The number gets higher and higher.
+
+</description>
+   <license>OSL-3.0</license>
+   <license_uri>http://opensource.org/licenses/osl-3.0.php</license_uri>
+   <version>1.2.1</version>
+   <stability>stable</stability>
+   <notes>Bugfix for notice in log.</notes>
+   <authors>
+      <name>
+         <name>Jeroen Vermeulen BVBA</name>
+      </name>
+      <user>
+         <user>jeroenvermeulen</user>
+      </user>
+      <email>
+         <email>info@jeroenvermeulen.eu</email>
+      </email>
+   </authors>
+   <depends_php_min>5.3.0</depends_php_min>
+   <depends_php_max>6.0.0</depends_php_max>
+   <depends>
+      <package>
+         <name>
+            <name/>
+         </name>
+         <channel>
+            <channel/>
+         </channel>
+         <min>
+            <min/>
+         </min>
+         <max>
+            <max/>
+         </max>
+         <files>
+            <files>                                                                                    </files>
+         </files>
+      </package>
+      <extension>
+         <name>
+            <name>Core</name>
+         </name>
+         <min>
+            <min/>
+         </min>
+         <max>
+            <max/>
+         </max>
+      </extension>
+   </depends>
+   <contents>
+      <target>
+         <target>magecommunity</target>
+         <target>mageetc</target>
+         <target>magecommunity</target>
+      </target>
+      <path>
+         <path>JeroenVermeulen/Solarium</path>
+         <path>modules/JeroenVermeulen_RewriteFix.xml</path>
+         <path>JeroenVermeulen/RewriteFix</path>
+      </path>
+      <type>
+         <type>dir</type>
+         <type>file</type>
+         <type>dir</type>
+      </type>
+      <include>
+         <include/>
+         <include/>
+         <include/>
+      </include>
+      <ignore>
+         <ignore/>
+         <ignore/>
+         <ignore/>
+      </ignore>
+   </contents>
+</_>

@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * Observers which fix several things with the 'catalog_url' index.
+ * These fixes are developed by Jeroen Vermeulen BVBA.
+ */
 class JeroenVermeulen_RewriteFix_Model_Observer {
 
     /**
@@ -62,4 +66,29 @@ class JeroenVermeulen_RewriteFix_Model_Observer {
         }
     }
 
+
+    /**
+     * This is an observer function for the event 'adminhtml_block_html_before'.
+     * If the block is the grid for the "Index Management" we update the description of the "Catalog Search Index"
+     *
+     * @param Varien_Event_Observer $observer
+     */
+    public function adminhtmlBlockHtmlBefore( $observer ) {
+        $block = $observer->getData( 'block' );
+        if (is_a( $block, 'Mage_Index_Block_Adminhtml_Process_Grid' )) {
+            /** @var Mage_Index_Block_Adminhtml_Process_Grid $block */
+            $collection = $block->getCollection();
+            $readAdapter = Mage::getSingleton('core/resource')->getConnection('core_read');
+            $table = Mage::getResourceModel('core/url_rewrite')->getMainTable();
+            foreach ($collection as $item) {
+                /** @var Mage_Index_Model_Process $item */
+                if ('catalog_url' == $item->getIndexerCode()) {
+                    $select = $readAdapter->select()->from( $table, array('count'=>'COUNT(*)' ) );
+                    $row = $readAdapter->fetchRow( $select );
+                    $count = number_format( $row['count'] );
+                    $item->setDescription( $item->getDescription() . ' - ' . $block->__('%s records',$count) );
+                }
+            }
+        }
+    }
 }
