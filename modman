@@ -1,0 +1,9 @@
+## JeroenVermeulen_RewriteFix Extension - Fix for bugs in Magento causing the core_url_rewrite table to grow very big.
+
+# ---- Module enable XML
+# Magento Global Config        - File          - modules/JeroenVermeulen_RewriteFix.xml
+app/etc/modules/JeroenVermeulen_RewriteFix.xml                              app/etc/modules/JeroenVermeulen_RewriteFix.xml
+
+# ---- Extension code dir
+# Magento Community Module     - Recursive Dir - JeroenVermeulen/RewriteFix
+app/code/community/JeroenVermeulen/RewriteFix/                              app/code/community/JeroenVermeulen/RewriteFix/
