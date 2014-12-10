@@ -1,5 +1,5 @@
 <_>
-   <form_key>8eUm3sGtjaZIZdeI</form_key>
+   <form_key>RQmm3BqjYEa6h1Q6</form_key>
    <name>JeroenVermeulen_RewriteFix</name>
    <channel>community</channel>
    <version_ids>
@@ -10,9 +10,9 @@
 </description>
    <license>OSL-3.0</license>
    <license_uri>http://opensource.org/licenses/osl-3.0.php</license_uri>
-   <version>1.2.2</version>
+   <version>1.2.3</version>
    <stability>stable</stability>
-   <notes>Added message about cleaning up.</notes>
+   <notes>Added shell script to cleanup.</notes>
    <authors>
       <name>
          <name>Jeroen Vermeulen BVBA</name>
@@ -41,7 +41,7 @@
             <max/>
          </max>
          <files>
-            <files>  </files>
+            <files>     </files>
          </files>
       </package>
       <extension>
@@ -61,23 +61,28 @@
          <target>magecommunity</target>
          <target>mageetc</target>
          <target>magecommunity</target>
+         <target>mage</target>
       </target>
       <path>
          <path>JeroenVermeulen/Solarium</path>
          <path>modules/JeroenVermeulen_RewriteFix.xml</path>
          <path>JeroenVermeulen/RewriteFix</path>
+         <path>shell/jv_rewrite_cleanup.php</path>
       </path>
       <type>
          <type>dir</type>
          <type>file</type>
+         <type>dir</type>
          <type>dir</type>
       </type>
       <include>
          <include/>
          <include/>
          <include/>
+         <include/>
       </include>
       <ignore>
+         <ignore/>
          <ignore/>
          <ignore/>
          <ignore/>

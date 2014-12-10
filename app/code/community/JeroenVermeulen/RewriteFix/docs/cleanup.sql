@@ -9,11 +9,13 @@ WHERE
   AND
   (
     ( `request_path` REGEXP '\-[[:digit:]]+$'
-      AND SUBSTRING(`request_path`, 1, LENGTH(`request_path`) - 5) = SUBSTRING(`target_path`, 1, LENGTH(`target_path`) - 5)
+      AND   SUBSTRING(`request_path`, 1, LENGTH(`request_path`) - 5)
+          = SUBSTRING(`target_path`, 1, LENGTH(`target_path`) - 5)
     )
     OR
     ( `request_path` REGEXP '\-[[:digit:]]+\.html?$'
-      AND SUBSTRING(`request_path`, 1, LENGTH(`request_path`) - 10) = SUBSTRING(`target_path`, 1, LENGTH(`target_path`) - 10)
+      AND   SUBSTRING_INDEX( SUBSTRING(`request_path`, 1, LENGTH(`request_path`) - 10), '/', -1) )
+          = SUBSTRING(`target_path`, 1, LENGTH(`target_path`) - 10)
     )
   )
 

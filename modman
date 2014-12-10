@@ -2,8 +2,12 @@
 
 # ---- Module enable XML
 # Magento Global Config        - File          - modules/JeroenVermeulen_RewriteFix.xml
-app/etc/modules/JeroenVermeulen_RewriteFix.xml                              app/etc/modules/JeroenVermeulen_RewriteFix.xml
+app/etc/modules/JeroenVermeulen_RewriteFix.xml   app/etc/modules/JeroenVermeulen_RewriteFix.xml
 
 # ---- Extension code dir
 # Magento Community Module     - Recursive Dir - JeroenVermeulen/RewriteFix
-app/code/community/JeroenVermeulen/RewriteFix/                              app/code/community/JeroenVermeulen/RewriteFix/
+app/code/community/JeroenVermeulen/RewriteFix/   app/code/community/JeroenVermeulen/RewriteFix/
+
+# ---- Shell script to cleanup
+# Magento other                - File          - shell/jv_rewrite_cleanup.php
+shell/jv_rewrite_cleanup.php                     shell/jv_rewrite_cleanup.php
