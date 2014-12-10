@@ -2,7 +2,7 @@
 <config>
     <modules>
         <JeroenVermeulen_RewriteFix>
-            <version>1.2.1</version>
+            <version>1.2.2</version>
         </JeroenVermeulen_RewriteFix>
     </modules>
     <global>
@@ -16,6 +16,11 @@
                 </rewrite>
             </catalog>
         </models>
+        <helpers>
+            <jeroenvermeulen_rewritefix>
+                <class>JeroenVermeulen_RewriteFix_Helper</class>
+            </jeroenvermeulen_rewritefix>
+        </helpers>
         <events>
             <controller_action_predispatch_cms_index_noRoute>
                 <observers>

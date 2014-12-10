@@ -1,5 +1,5 @@
 <_>
-   <form_key>9KipXNCL198NKrEm</form_key>
+   <form_key>8eUm3sGtjaZIZdeI</form_key>
    <name>JeroenVermeulen_RewriteFix</name>
    <channel>community</channel>
    <version_ids>
@@ -7,13 +7,12 @@
    </version_ids>
    <summary>Due to bugs in Magento, once an rewrite URL ends with -[number] you get more and more rewrite URLs to the same target. The number gets higher and higher.</summary>
    <description>Due to bugs in Magento, once an rewrite URL ends with -[number] you get more and more rewrite URLs to the same target. The number gets higher and higher.
-
 </description>
    <license>OSL-3.0</license>
    <license_uri>http://opensource.org/licenses/osl-3.0.php</license_uri>
-   <version>1.2.1</version>
+   <version>1.2.2</version>
    <stability>stable</stability>
-   <notes>Bugfix for notice in log.</notes>
+   <notes>Added message about cleaning up.</notes>
    <authors>
       <name>
          <name>Jeroen Vermeulen BVBA</name>
@@ -42,7 +41,7 @@
             <max/>
          </max>
          <files>
-            <files>                                                                                    </files>
+            <files>  </files>
          </files>
       </package>
       <extension>

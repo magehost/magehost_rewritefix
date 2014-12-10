@@ -10,4 +10,4 @@ WHERE `request_path` REGEXP '\-[[:digit:]]+$'
       = SUBSTRING( `target_path`, 1, LENGTH(`target_path`)-5 )
 
 -- Reindex "Catalog URL Rewrites":
--- $   screen ~/httpdocs/shell/indexer.php -- --reindex catalog_url
+-- $   screen php ~/httpdocs/shell/indexer.php -- --reindex catalog_url

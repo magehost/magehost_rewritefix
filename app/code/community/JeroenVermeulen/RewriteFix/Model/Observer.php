@@ -47,22 +47,30 @@ class JeroenVermeulen_RewriteFix_Model_Observer {
     public function afterReindexProcessCatalogUrl( $observer ) {
         $cleanForIds = array();
         $stores = Mage::app()->getStores( true );
+        $helper = Mage::helper( 'jeroenvermeulen_rewritefix' );
         /** @var Mage_Core_Model_Store $store */
         foreach ( $stores as $store ) {
             if ( ! Mage::getStoreConfigFlag( 'catalog/seo/product_use_categories', $store->getId() ) ) {
-                $cleanForIds[] = $store->getId();
+                $cleanForIds[] = intval($store->getId());
             }
         }
         if ( !empty($cleanForIds) ) {
             $writeAdapter = Mage::getSingleton('core/resource')->getConnection('core_write');
             $table = Mage::getResourceModel('core/url_rewrite')->getMainTable();
-            $sql = sprintf( 'DELETE FROM `%s`
+            $sql = sprintf( 'DELETE FROM %s
                              WHERE `store_id` IN (%s)
                              AND `category_id` IS NOT NULL
                              AND `product_id` IS NOT NULL',
-                            $table,
-                            implode( ',', $cleanForIds ) );
-            $writeAdapter->query( $sql );
+                            $writeAdapter->quoteIdentifier($table),
+                            $writeAdapter->quote($cleanForIds) );
+            $stmt = $writeAdapter->query( $sql );
+            $count = $stmt->rowCount();
+            if ( $count ) {
+                $helper->successMessage( $helper->__( "JV RewriteFix: Cleaned up %d records from '%s' index because '%s' is disabled.",
+                                                      $count,
+                                                      Mage::helper('catalog')->__("Catalog URL Rewrites"),
+                                                      Mage::helper('catalog')->__("Use Categories Path for Product URLs") ) );
+            }
         }
     }
 
@@ -84,8 +92,7 @@ class JeroenVermeulen_RewriteFix_Model_Observer {
                 /** @var Mage_Index_Model_Process $item */
                 if ('catalog_url' == $item->getIndexerCode()) {
                     $select = $readAdapter->select()->from( $table, array('count'=>'COUNT(*)' ) );
-                    $row = $readAdapter->fetchRow( $select );
-                    $count = number_format( $row['count'] );
+                    $count = number_format( $readAdapter->fetchOne( $select ) );
                     $item->setDescription( $item->getDescription() . ' - ' . $block->__('%s records',$count) );
                 }
             }
