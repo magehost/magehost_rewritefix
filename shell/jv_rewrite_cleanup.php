@@ -50,6 +50,7 @@ class Mage_Shell_RewriteCleanup extends Mage_Shell_Abstract
                     $writeAdapter->query( $sql );
                 }
             }
+            echo "Done.\n";
         } else {
             echo $this->usageHelp();
         }
