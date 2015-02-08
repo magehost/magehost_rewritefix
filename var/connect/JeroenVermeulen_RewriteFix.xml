@@ -1,5 +1,5 @@
 <_>
-   <form_key>RQmm3BqjYEa6h1Q6</form_key>
+   <form_key>Qd22X9LMi8WmnSGW</form_key>
    <name>JeroenVermeulen_RewriteFix</name>
    <channel>community</channel>
    <version_ids>
@@ -10,7 +10,7 @@
 </description>
    <license>OSL-3.0</license>
    <license_uri>http://opensource.org/licenses/osl-3.0.php</license_uri>
-   <version>1.2.3</version>
+   <version>1.2.4</version>
    <stability>stable</stability>
    <notes>Added shell script to cleanup.</notes>
    <authors>
@@ -30,18 +30,23 @@
       <package>
          <name>
             <name/>
+            <name>Mage_Core_Modules</name>
          </name>
          <channel>
             <channel/>
+            <channel>community</channel>
          </channel>
          <min>
             <min/>
+            <min>1.7.0.2</min>
          </min>
          <max>
             <max/>
+            <max>2.0.0.0</max>
          </max>
          <files>
-            <files>     </files>
+            <files>       </files>
+            <files>       </files>
          </files>
       </package>
       <extension>
@@ -88,4 +93,8 @@
          <ignore/>
       </ignore>
    </contents>
+   <page>1</page>
+   <limit>200</limit>
+   <folder/>
+   <package/>
 </_>
