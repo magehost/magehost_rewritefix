@@ -1,7 +1,6 @@
 <?php
-
 /**
- * Functions copied from: Magento 1.7.0.2
+ * Functions copied from: Magento 1.9.1.0
  *
  * Reason: Due to bugs in Magento, once an rewrite URL ends with -[number] you get more and more rewrite URLs
  *         to the same target. The number gets higher and higher.
@@ -144,6 +143,7 @@ class JeroenVermeulen_RewriteFix_Model_Catalog_Url extends Mage_Catalog_Model_Ur
             }
             // END OF PATCH
 
+            // @TODO This function _deleteOldTargetPath does not seem to exist in Magento 1.6.2.0
             if ($this->_deleteOldTargetPath($fullPath, $idPath, $storeId)) {
                 return $fullPath;
             }
