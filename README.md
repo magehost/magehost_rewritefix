@@ -5,8 +5,12 @@
 Due to bugs in Magento, once an rewrite URL ends with -[number] you get more and more rewrite URLs to the same target. The number gets higher and higher. Indexing gets slower and slower.
 
 This extension is a workaround for this problem.
-
 Requires Magento 1.7.0.2 or greater.
+
+How to use:
+* Install extension via [modman](https://github.com/colinmollenhour/modman) or copy it into you Magento root
+* Reindex the `catalog_url` index, it will probably clean up a lot
+* Run `php shell/jv_rewrite_cleanup.php -- cleanup` once to clean up more
 
 You can verify if your installation has this problem by using this query (presuming no DB prefix). If the largest count is > the number of stores then this is a hint that something is wrong. 
 
@@ -19,7 +23,6 @@ LIMIT 50
 ```
 
 Also you can open the id_path with the highest count `select * where id_path = [ID from previous query]`
-
-There should be 1 entry per id_path for every store view - and not more - unless you renamed the produuct URI yourself. 
+There should be 1 entry per id_path for every store view - and not more - unless you renamed the product URI yourself. 
 
 
