@@ -29,13 +29,10 @@ class Mage_Shell_RewriteCleanup extends Mage_Shell_Abstract
     public function run()
     {
         if ( $this->getArg('cleanup') ) {
-            // For stores that have the config setting 'Use Categories Path for Product URLs' set to disabled:
-            // clean up records in core_url_rewite which are made for category and product combination URLs.
-            echo "Checking if we can cleanup Rewrites because 'Use Categories Path for Product URLs' is disabled...\n";
+            echo "Checking for unnecessary product URLs with category path...\n";
             $dummyObserver = new Varien_Event_Observer();
             Mage::getSingleton('jeroenvermeulen_rewritefix/observer')->afterReindexProcessCatalogUrl($dummyObserver);
 
-            // Delete the redirects which only add or remove  -[number]  in the URL while the rest remains the same.
             echo "Checking if we can cleanup rewrites which only add/remove '-[number]' in the URL...\n";
             $sql = sprintf( " SELECT `url_rewrite_id`, `request_path`, `target_path`
                               FROM %s
