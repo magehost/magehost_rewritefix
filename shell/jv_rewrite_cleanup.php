@@ -33,7 +33,7 @@ class Mage_Shell_RewriteCleanup extends Mage_Shell_Abstract
             $dummyObserver = new Varien_Event_Observer();
             Mage::getSingleton('jeroenvermeulen_rewritefix/observer')->afterReindexProcessCatalogUrl($dummyObserver);
 
-            echo "Checking if we can cleanup rewrites which only add/remove '-[number]' in the URL...\n";
+            echo "\nChecking if we can cleanup rewrites which only add/remove '-[number]' in the URL...\n";
             $sql = sprintf( " SELECT `url_rewrite_id`, `request_path`, `target_path`
                               FROM %s
                               WHERE `options` = 'RP'
@@ -60,7 +60,7 @@ class Mage_Shell_RewriteCleanup extends Mage_Shell_Abstract
             } else {
                 echo "Found no records to clean.\n";
             }
-            echo "Done.\n";
+            echo "\nDone.\n";
         } else {
             echo $this->usageHelp();
         }
