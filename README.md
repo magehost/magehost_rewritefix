@@ -9,8 +9,8 @@ Requires Magento 1.7.0.2 or greater.
 
 How to use:
 * Install extension via [modman](https://github.com/colinmollenhour/modman) or copy it into you Magento root
-* Reindex the `catalog_url` index, it will probably clean up a lot
-* Run `php shell/jv_rewrite_cleanup.php -- cleanup` once to clean up more
+* Run `php shell/jv_rewrite_cleanup.php -- cleanup` once
+* Reindex the `catalog_url` index
 
 You can verify if your installation has this problem by using this query (presuming no DB prefix). If the largest count is > the number of stores then this is a hint that something is wrong. 
 
