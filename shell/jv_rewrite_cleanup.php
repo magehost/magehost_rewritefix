@@ -29,6 +29,14 @@ class Mage_Shell_RewriteCleanup extends Mage_Shell_Abstract
     public function run()
     {
         if ( $this->getArg('cleanup') ) {
+            // For stores that have the config setting 'Use Categories Path for Product URLs' set to disabled:
+            // clean up records in core_url_rewite which are made for category and product combination URLs.
+            echo "Checking if we can cleanup Rewrites because 'Use Categories Path for Product URLs' is disabled...\n";
+            $dummyObserver = new Varien_Event_Observer();
+            Mage::getSingleton('jeroenvermeulen_rewritefix/observer')->afterReindexProcessCatalogUrl($dummyObserver);
+
+            // Delete the redirects which only add or remove  -[number]  in the URL while the rest remains the same.
+            echo "Checking if we can cleanup rewrites which only add/remove '-[number]' in the URL...\n";
             $sql = sprintf( " SELECT `url_rewrite_id`, `request_path`, `target_path`
                               FROM %s
                               WHERE `options` = 'RP'
@@ -37,11 +45,11 @@ class Mage_Shell_RewriteCleanup extends Mage_Shell_Abstract
                             $this->writeAdapter->quoteIdentifier($this->table) );
             /** @var Varien_Db_Statement_Pdo_Mysql $stmt */
             $stmt = $this->writeAdapter->query( $sql );
-            $pregFilter = '/\-\d+/';
+            $pregFilter = '/\-\d+(\.html)?$/';
             $deleteCount = 0;
             $deleteList = array();
             while ( $row = $stmt->fetch() ) {
-                if ( preg_replace($pregFilter,'',$row['request_path']) == preg_replace($pregFilter,'',$row['target_path']) ) {
+                if ( preg_replace($pregFilter,'$1',$row['request_path']) == preg_replace($pregFilter,'$1',$row['target_path']) ) {
                     $deleteList[] = intval( $row['url_rewrite_id'] );
                 }
                 if ( 5000 <= count($deleteList) ) {
@@ -53,7 +61,7 @@ class Mage_Shell_RewriteCleanup extends Mage_Shell_Abstract
             if ( $deleteCount ) {
                 printf( "\nCleaned up %d records.\n", $deleteCount );
             } else {
-                echo "Congratulations, found no records to clean.\n";
+                echo "Found no records to clean.\n";
             }
             echo "Done.\n";
         } else {
@@ -88,7 +96,7 @@ USAGE;
      * @return int              - Nr of ids deleted
      */
     protected function cleanRewrites( $deleteList ) {
-	$count = count( $deleteList );
+        $count = count( $deleteList );
         if ( $count ) {
             $chunks = array_chunk( $deleteList, 100 );
             foreach ($chunks as $chunk) {
@@ -97,10 +105,10 @@ USAGE;
                                 $this->writeAdapter->quote( $chunk ) );
                 $this->writeAdapter->query( $sql );
             }
-	}
-        echo ".";
-        flush();
-	return $count;
+            echo ".";
+            flush();
+        }
+        return $count;
     }
 
 }
