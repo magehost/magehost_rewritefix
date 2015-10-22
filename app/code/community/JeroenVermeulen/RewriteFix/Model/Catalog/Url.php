@@ -143,7 +143,6 @@ class JeroenVermeulen_RewriteFix_Model_Catalog_Url extends Mage_Catalog_Model_Ur
             }
             // END OF PATCH
 
-            // @TODO This function _deleteOldTargetPath does not seem to exist in Magento 1.6.2.0
             if ($this->_deleteOldTargetPath($fullPath, $idPath, $storeId)) {
                 return $fullPath;
             }
@@ -163,5 +162,19 @@ class JeroenVermeulen_RewriteFix_Model_Catalog_Url extends Mage_Catalog_Model_Ur
          * Use unique path generator
          */
         return $this->getUnusedPath($storeId, $requestPath.$suffix, $idPath);
+    }
+
+    /**
+     * @param string $requestPath
+     * @param string $idPath
+     * @param int $storeId
+     * @return bool
+     */
+    function _deleteOldTargetPath($requestPath, $idPath, $storeId) {
+        // This function does not exist in older Magento versions.
+        if ( method_exists( get_parent_class($this), '_deleteOldTargetPath' ) ) {
+            return parent::_deleteOldTargetPath($requestPath, $idPath, $storeId);
+        }
+        return false;
     }
 }
