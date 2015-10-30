@@ -1,0 +1,24 @@
+{
+   "name": "jeroenvermeulen/JeroenVermeulen_RewriteFix",
+    "license": "GPL-3.0",
+    "type": "magento-module",
+    "version": "1.4.0",
+    "description":"JeroenVermeulen_RewriteFix",
+    "repositories":[
+    ],
+    "require":{
+    },
+    "authors":[
+        {
+            "name":"Jeroen Vermeulen",
+            "email":"info@jeroenvermeulen.eu"
+        }
+    ], 
+    "extra": {
+        "map": [
+            ["app/etc/modules/JeroenVermeulen_RewriteFix.xml", "app/etc/modules/JeroenVermeulen_RewriteFix.xml"],
+            ["app/code/community/JeroenVermeulen/RewriteFix/", "app/code/community/JeroenVermeulen/RewriteFix/"],
+            ["shell/jv_rewrite_cleanup.php", "shell/jv_rewrite_cleanup.php"]
+        ]
+    }
+}
