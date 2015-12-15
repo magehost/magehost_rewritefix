@@ -38,7 +38,7 @@ class Mage_Shell_RewriteCleanup extends Mage_Shell_Abstract
                               FROM %s
                               WHERE `options` = 'RP'
                               AND `product_id` IS NOT NULL
-                              AND id_path LIKE '%%_%%' ",
+                              AND id_path LIKE '%%\_%%' ",
                             $this->writeAdapter->quoteIdentifier($this->table) );
             /** @var Varien_Db_Statement_Pdo_Mysql $stmt */
             $stmt = $this->writeAdapter->query( $sql );
