@@ -8,7 +8,12 @@ This extension is a workaround for this problem.
 Requires Magento 1.7.0.2 or greater.
 
 How to use:
-* Install extension via [modman](https://github.com/colinmollenhour/modman) or copy it into you Magento root
+1. Make sure you run Magento 1.7 or newer 
+* Install [Modman](https://github.com/colinmollenhour/modman)
+* `cd` to your Magento root dir
+* `test -d .modman || modman init`
+* `modman clone --copy --force https://github.com/jeroenvermeulen/JeroenVermeulen_RewriteFix`
+* If you keep your Magento code in Git: Add `.modman` to your `.gitignore`
 * Run `php shell/jv_rewrite_cleanup.php -- cleanup` once
 * Reindex the `catalog_url` index
 
