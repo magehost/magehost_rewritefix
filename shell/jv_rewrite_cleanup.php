@@ -19,8 +19,9 @@ class Mage_Shell_RewriteCleanup extends Mage_Shell_Abstract
      * Constructor, prepare database stuff.
      */
     public function _construct() {
+        $this->readAdapter = Mage::getSingleton('core/resource')->getConnection('core_read');
+        $this->readAdapter->getConnection()->setAttribute( PDO::MYSQL_ATTR_USE_BUFFERED_QUERY, false );        
         $this->writeAdapter = Mage::getSingleton('core/resource')->getConnection('core_write');
-        $this->writeAdapter->getConnection()->setAttribute( PDO::MYSQL_ATTR_USE_BUFFERED_QUERY, false );        
         $this->table = Mage::getResourceModel('core/url_rewrite')->getMainTable();
     }
 
@@ -35,27 +36,8 @@ class Mage_Shell_RewriteCleanup extends Mage_Shell_Abstract
             Mage::getSingleton('jeroenvermeulen_rewritefix/observer')->afterReindexProcessCatalogUrl($dummyObserver);
 
             echo "\nChecking if we can cleanup rewrites which only add/remove '-[number]' in the URL...\n";
-            $sql = sprintf( " SELECT `url_rewrite_id`, `request_path`, `target_path`
-                              FROM %s
-                              WHERE `options` = 'RP'
-                              AND `product_id` IS NOT NULL
-                              AND id_path LIKE '%%\_%%' ",
-                            $this->writeAdapter->quoteIdentifier($this->table) );
-            /** @var Varien_Db_Statement_Pdo_Mysql $stmt */
-            $stmt = $this->writeAdapter->query( $sql );
-            $pregFilter = '/\-\d+(\.html)?$/';
-            $deleteCount = 0;
-            $deleteList = array();
-            while ( $row = $stmt->fetch() ) {
-                if ( preg_replace($pregFilter,'$1',$row['request_path']) == preg_replace($pregFilter,'$1',$row['target_path']) ) {
-                    $deleteList[] = intval( $row['url_rewrite_id'] );
-                }
-                if ( 5000 <= count($deleteList) ) {
-                    $deleteCount += $this->cleanRewrites( $deleteList );
-                    $deleteList = array();
-                }
-            }
-            $deleteCount += $this->cleanRewrites( $deleteList );
+            $deleteCount = $this->cleanupRun();
+            echo "\n";
             if ( $deleteCount ) {
                 printf( "\nCleaned up %d records.\n", $deleteCount );
             } else {
@@ -65,6 +47,39 @@ class Mage_Shell_RewriteCleanup extends Mage_Shell_Abstract
         } else {
             echo $this->usageHelp();
         }
+    }
+
+    public function cleanupRun( $startRow = 0 ) {
+        $chunkSize = 5000;
+        $sql = sprintf( " SELECT `url_rewrite_id`, `request_path`, `target_path`
+                          FROM %s
+                          WHERE `options` = 'RP'
+                          AND `product_id` IS NOT NULL
+                          AND id_path LIKE '%%\_%%' 
+                          LIMIT %d OFFSET %d ",
+                        $this->writeAdapter->quoteIdentifier($this->table),
+                        PHP_INT_MAX,
+                        $startRow );
+        /** @var Varien_Db_Statement_Pdo_Mysql $stmt */
+        $stmt = $this->readAdapter->query( $sql );
+        $pregFilter = '/\-\d+(\.html)?$/';
+        $deleteCount = 0;
+        $deleteList = array();
+        while ( ($row = $stmt->fetch()) && $chunkSize > count($deleteList) ) {
+            if ( preg_replace($pregFilter,'$1',$row['request_path']) == preg_replace($pregFilter,'$1',$row['target_path']) ) {
+                $deleteList[] = intval( $row['url_rewrite_id'] );
+            }
+            unset( $row );
+            $startRow++;
+        }
+        $stmt->closeCursor();
+        unset( $stmt );
+        $deleteCount += $this->cleanRewrites( $deleteList );
+        if ( $chunkSize <= count($deleteList) ) {
+            unset( $deleteList );
+            $deleteCount += $this->cleanupRun( $startRow );
+        }
+        return $deleteCount;
     }
 
     /**
