@@ -19,8 +19,9 @@ class Mage_Shell_RewriteCleanup extends Mage_Shell_Abstract
      * Constructor, prepare database stuff.
      */
     public function _construct() {
-            $this->writeAdapter = Mage::getSingleton('core/resource')->getConnection('core_write');
-            $this->table = Mage::getResourceModel('core/url_rewrite')->getMainTable();
+        $this->writeAdapter = Mage::getSingleton('core/resource')->getConnection('core_write');
+        $this->writeAdapter->getConnection()->setAttribute( PDO::MYSQL_ATTR_USE_BUFFERED_QUERY, false );        
+        $this->table = Mage::getResourceModel('core/url_rewrite')->getMainTable();
     }
 
     /**
