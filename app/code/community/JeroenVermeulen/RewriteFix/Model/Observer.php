@@ -7,9 +7,15 @@
 class JeroenVermeulen_RewriteFix_Model_Observer {
 
     /**
+     * 404 Catcher.
+     * 
+     * When an URL is hit of a product with categories prepended while 'Use Categories Path for Product URLs' is set 
+     * to disabled: Try to redirect to the product URL without category prefix.
+     * /category-name/product-name           =301=>  /product-name
+     * /category-name/product-name.html      =301=>  /product-name.html
+     * 
      * When an URL is hit ending with a number and causes a 404 error, do a 301 redirect to the URL without the number.
      * This helps when you are cleaning up old URLs ending with a number.
-     *
      * /category-name/product-name-123       =301=>  /category-name/product-name
      * /category-name/product-name-123/      =301=>  /category-name/product-name/
      * /category-name/product-name-123.html  =301=>  /category-name/product-name.html
@@ -24,17 +30,38 @@ class JeroenVermeulen_RewriteFix_Model_Observer {
         $originalPath = $request->getOriginalPathInfo();
         $baseUrl = rtrim( Mage::getBaseUrl(), '/' ); // Remove trailing slash
         $currentUrl =  $baseUrl . $originalPath;
-        if ( preg_match( '#^([/\w\-]+)\-\d+(\.html|/)?$#', $originalPath, $matches ) ) {
-            // URL was ending with a number, let's cut it off and 301 redirect
-            $newUrl = $baseUrl . $matches[1];
+        $redirectUrl = false;
+
+        // If config setting 'Use Categories Path for Product URLs' is set to disabled:
+        // Check if request can be redirected to product URL after removing category path.
+        if ( empty($redirectUrl) && ! Mage::getStoreConfigFlag('catalog/seo/product_use_categories') ) {
+            //Get the last part of url: url_path
+            $urlPath = parse_url( $currentUrl, PHP_URL_PATH ); // parse the url
+            $urlPath = trim( $urlPath, '/' );
+            $splitPath = explode( '/', $urlPath );
+            if ( count($splitPath) > 1 ) {
+                $productUrl = end( $splitPath );
+                $urlResource = Mage::getResourceModel('catalog/url');
+                $storeId = Mage::app()->getStore()->getId();
+                $rewrite = $urlResource->getRewriteByRequestPath($productUrl, $storeId);
+                if ($rewrite) {
+                    $redirectUrl = '/' . $rewrite->getRequestPath();
+                }
+            }
+        }
+
+        // If URL is ending with a number, let's cut it off and 301 redirect
+        if ( empty($redirectUrl) && preg_match( '#^([/\w\-]+)\-\d+(\.html|/)?$#', $originalPath, $matches ) ) {
+            $redirectUrl = $baseUrl . $matches[1];
             if ( isset($matches[2]) ) {
-                $newUrl .= $matches[2];
+                $redirectUrl .= $matches[2];
             }
-            if ( $currentUrl != $newUrl ) { // Double check to prevent looping
-                $response->setRedirect($newUrl, 301);
-                $response->sendHeaders();
-                $controllerAction->setFlag( '', Mage_Core_Controller_Varien_Action::FLAG_NO_DISPATCH, true );
-            }
+        }
+
+        if ( !empty($redirectUrl) &&  $currentUrl != $redirectUrl ) { // Double check to prevent looping
+            $response->setRedirect($redirectUrl, 301);
+            $response->sendHeaders();
+            $controllerAction->setFlag( '', Mage_Core_Controller_Varien_Action::FLAG_NO_DISPATCH, true );
         }
     }
 

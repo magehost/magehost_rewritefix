@@ -2,7 +2,7 @@
 <config>
     <modules>
         <JeroenVermeulen_RewriteFix>
-            <version>1.5.0</version>
+            <version>1.5.1</version>
         </JeroenVermeulen_RewriteFix>
     </modules>
     <global>
@@ -22,6 +22,16 @@
             </jeroenvermeulen_rewritefix>
         </helpers>
         <events>
+            <controller_action_predispatch_cms_index_noroute>
+                <observers>
+                    <jeroenvermeulen_rewritefix>
+                        <type>singleton</type>
+                        <class>jeroenvermeulen_rewritefix/observer</class>
+                        <method>controllerActionPredispatchCmsIndexNoRoute</method>
+                    </jeroenvermeulen_rewritefix>
+                </observers>
+            </controller_action_predispatch_cms_index_noroute>
+            <!-- for Magento pre SUPEE-7405 -->
             <controller_action_predispatch_cms_index_noRoute>
                 <observers>
                     <jeroenvermeulen_rewritefix>
@@ -31,6 +41,7 @@
                     </jeroenvermeulen_rewritefix>
                 </observers>
             </controller_action_predispatch_cms_index_noRoute>
+            <!-- /for Magento pre SUPEE-7405 -->
             <after_reindex_process_catalog_url>
                 <observers>
                     <jeroenvermeulen_rewritefix>
