@@ -1,4 +1,4 @@
-## JeroenVermeulen_RewriteFix
+## MageHost_RewriteFix
 
 **We are sorry but we cannot offer customer support for this extension, and it is provided "as-is" for free. We use it at a number of big shops and it works well.**
 
@@ -12,9 +12,9 @@ How to use:
 * Install [Modman](https://github.com/colinmollenhour/modman)
 * `cd` to your Magento root dir
 * `test -d .modman || modman init`
-* `modman clone --copy --force https://github.com/jeroenvermeulen/JeroenVermeulen_RewriteFix`
+* `modman clone --copy --force https://github.com/magehost/MageHost_RewriteFix`
 * If you keep your Magento code in Git: Add `.modman` to your `.gitignore`
-* Run `php shell/jv_rewrite_cleanup.php -- cleanup` once
+* Run `php shell/mh_rewrite_cleanup.php -- cleanup` once
 * Reindex the `catalog_url` index
 
 You can verify if your installation has this problem by using this query (presuming no DB prefix). If the largest count is > the number of stores then this is a hint that something is wrong. 
