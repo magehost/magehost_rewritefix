@@ -12,7 +12,7 @@ How to use:
 * Install [Modman](https://github.com/colinmollenhour/modman)
 * `cd` to your Magento root dir
 * `test -d .modman || modman init`
-* `modman clone --copy --force https://github.com/magehost/MageHost_RewriteFix`
+* `modman clone --copy --force https://github.com/magehost/magehost_rewritefix`
 * If you keep your Magento code in Git: Add `.modman` to your `.gitignore`
 * Run `php shell/mh_rewrite_cleanup.php -- cleanup` once
 * Reindex the `catalog_url` index
