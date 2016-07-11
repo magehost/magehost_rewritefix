@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
 <config>
     <modules>
-        <JeroenVermeulen_RewriteFix>
+        <MageHost_RewriteFix>
             <active>true</active>
             <codePool>community</codePool>
             <depends>
                 <Mage_Catalog/>
             </depends>
-        </JeroenVermeulen_RewriteFix>
+        </MageHost_RewriteFix>
     </modules>
 </config>

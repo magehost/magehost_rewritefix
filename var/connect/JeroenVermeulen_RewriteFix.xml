@@ -1,6 +1,6 @@
 <_>
    <form_key>Qd22X9LMi8WmnSGW</form_key>
-   <name>JeroenVermeulen_RewriteFix</name>
+   <name>MageHost_RewriteFix</name>
    <channel>community</channel>
    <version_ids>
       <version_ids>2</version_ids>
@@ -15,13 +15,13 @@
    <notes>Added shell script to cleanup.</notes>
    <authors>
       <name>
-         <name>Jeroen Vermeulen BVBA</name>
+         <name>MageHost BVBA</name>
       </name>
       <user>
          <user>jeroenvermeulen</user>
       </user>
       <email>
-         <email>info@jeroenvermeulen.eu</email>
+         <email>info@magehost.pro</email>
       </email>
    </authors>
    <depends_php_min>5.3.0</depends_php_min>
@@ -69,10 +69,10 @@
          <target>mage</target>
       </target>
       <path>
-         <path>JeroenVermeulen/Solarium</path>
-         <path>modules/JeroenVermeulen_RewriteFix.xml</path>
-         <path>JeroenVermeulen/RewriteFix</path>
-         <path>shell/jv_rewrite_cleanup.php</path>
+         <path>MageHost/Solarium</path>
+         <path>modules/MageHost_RewriteFix.xml</path>
+         <path>MageHost/RewriteFix</path>
+         <path>shell/mh_rewrite_cleanup.php</path>
       </path>
       <type>
          <type>dir</type>

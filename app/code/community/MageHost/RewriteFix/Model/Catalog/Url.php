@@ -12,9 +12,9 @@
  * Model for overriding core URL functions
  *
  * This fix is developed by Bas Peters from Comaxx BV, The Netherlands.
- * It was packaged by Jeroen Vermeulen BVBA.
+ * It was packaged by MagentoHosting.pro / MageHost BVBA.
  */
-class JeroenVermeulen_RewriteFix_Model_Catalog_Url extends Mage_Catalog_Model_Url {
+class MageHost_RewriteFix_Model_Catalog_Url extends Mage_Catalog_Model_Url {
 
     /**
      * Get unique category request path

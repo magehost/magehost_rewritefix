@@ -2,9 +2,9 @@
 
 /**
  * Observers which fix several things with the 'catalog_url' index.
- * These fixes are developed by Jeroen Vermeulen BVBA.
+ * These fixes are developed by MagentoHosting.pro / MageHost BVBA.
  */
-class JeroenVermeulen_RewriteFix_Model_Observer {
+class MageHost_RewriteFix_Model_Observer {
 
     /**
      * 404 Catcher.
@@ -74,7 +74,7 @@ class JeroenVermeulen_RewriteFix_Model_Observer {
     public function afterReindexProcessCatalogUrl( $observer ) {
         $cleanForIds = array();
         $stores = Mage::app()->getStores( true );
-        $helper = Mage::helper( 'jeroenvermeulen_rewritefix' );
+        $helper = Mage::helper( 'magehost_rewritefix' );
         /** @var Mage_Core_Model_Store $store */
         foreach ( $stores as $store ) {
             if ( ! Mage::getStoreConfigFlag( 'catalog/seo/product_use_categories', $store->getId() ) ) {
@@ -93,7 +93,7 @@ class JeroenVermeulen_RewriteFix_Model_Observer {
             $stmt = $writeAdapter->query( $sql );
             $count = $stmt->rowCount();
             if ( $count ) {
-                $helper->successMessage( $helper->__( "JV RewriteFix: Cleaned up %d records from '%s' index because '%s' is disabled.",
+                $helper->successMessage( $helper->__( "MageHost RewriteFix: Cleaned up %d records from '%s' index because '%s' is disabled.",
                                                       $count,
                                                       Mage::helper('catalog')->__("Catalog URL Rewrites"),
                                                       Mage::helper('catalog')->__("Use Categories Path for Product URLs") ) );

@@ -43,9 +43,10 @@ class Mage_Shell_RewriteCleanup extends Mage_Shell_Abstract
     public function run()
     {
         if ( $this->getArg('cleanup') ) {
+            echo "==== MageHost RewriteFix - https://MagentoHosting.pro ====\n\n";
             echo "Checking for unnecessary product URLs with category path...\n";
             $dummyObserver = new Varien_Event_Observer();
-            Mage::getSingleton('jeroenvermeulen_rewritefix/observer')->afterReindexProcessCatalogUrl($dummyObserver);
+            Mage::getSingleton('magehost_rewritefix/observer')->afterReindexProcessCatalogUrl($dummyObserver);
 
             echo "\nChecking if we can cleanup rewrites which only add/remove '-[number]' in the URL...\n";
 
@@ -103,8 +104,8 @@ WARNING: Use at your own risk. Create a database backup first.
 This script will remove entries from the catalog_url index containing which
 contain -[number] and point to a URL which is the same except for the number.
 
-Usage:  php -f jv_rewrite_cleanup.php -- [options]
-        php -f jv_rewrite_cleanup.php -- cleanup
+Usage:  php -f mh_rewrite_cleanup.php -- [options]
+        php -f mh_rewrite_cleanup.php -- cleanup
 
   cleanup           Cleanup Catalog URL index
   help              This help

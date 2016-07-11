@@ -1,24 +1,24 @@
 {
-   "name": "jeroenvermeulen/JeroenVermeulen_RewriteFix",
+   "name": "magehost/MageHost_RewriteFix",
     "license": "GPL-3.0",
     "type": "magento-module",
     "version": "1.4.0",
-    "description":"JeroenVermeulen_RewriteFix",
+    "description":"MageHost_RewriteFix",
     "repositories":[
     ],
     "require":{
     },
     "authors":[
         {
-            "name":"Jeroen Vermeulen",
-            "email":"info@jeroenvermeulen.eu"
+            "name":"MagentoHosting.pro - Jeroen Vermeulen",
+            "email":"info@magehost.pro"
         }
     ], 
     "extra": {
         "map": [
-            ["app/etc/modules/JeroenVermeulen_RewriteFix.xml", "app/etc/modules/JeroenVermeulen_RewriteFix.xml"],
-            ["app/code/community/JeroenVermeulen/RewriteFix/", "app/code/community/JeroenVermeulen/RewriteFix/"],
-            ["shell/jv_rewrite_cleanup.php", "shell/jv_rewrite_cleanup.php"]
+            ["app/etc/modules/MageHost_RewriteFix.xml", "app/etc/modules/MageHost_RewriteFix.xml"],
+            ["app/code/community/MageHost/RewriteFix/", "app/code/community/MageHost/RewriteFix/"],
+            ["shell/mh_rewrite_cleanup.php", "shell/mh_rewrite_cleanup.php"]
         ]
     }
 }

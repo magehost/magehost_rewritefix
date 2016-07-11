@@ -1,63 +1,63 @@
 <?xml version="1.0"?>
 <config>
     <modules>
-        <JeroenVermeulen_RewriteFix>
-            <version>1.5.1</version>
-        </JeroenVermeulen_RewriteFix>
+        <MageHost_RewriteFix>
+            <version>1.6.0</version>
+        </MageHost_RewriteFix>
     </modules>
     <global>
         <models>
-            <jeroenvermeulen_rewritefix>
-                <class>JeroenVermeulen_RewriteFix_Model</class>
-            </jeroenvermeulen_rewritefix>
+            <magehost_rewritefix>
+                <class>MageHost_RewriteFix_Model</class>
+            </magehost_rewritefix>
             <catalog>
                 <rewrite>
-                    <url>JeroenVermeulen_RewriteFix_Model_Catalog_Url</url>
+                    <url>MageHost_RewriteFix_Model_Catalog_Url</url>
                 </rewrite>
             </catalog>
         </models>
         <helpers>
-            <jeroenvermeulen_rewritefix>
-                <class>JeroenVermeulen_RewriteFix_Helper</class>
-            </jeroenvermeulen_rewritefix>
+            <magehost_rewritefix>
+                <class>MageHost_RewriteFix_Helper</class>
+            </magehost_rewritefix>
         </helpers>
         <events>
             <controller_action_predispatch_cms_index_noroute>
                 <observers>
-                    <jeroenvermeulen_rewritefix>
+                    <magehost_rewritefix>
                         <type>singleton</type>
-                        <class>jeroenvermeulen_rewritefix/observer</class>
+                        <class>magehost_rewritefix/observer</class>
                         <method>controllerActionPredispatchCmsIndexNoRoute</method>
-                    </jeroenvermeulen_rewritefix>
+                    </magehost_rewritefix>
                 </observers>
             </controller_action_predispatch_cms_index_noroute>
             <!-- for Magento pre SUPEE-7405 -->
             <controller_action_predispatch_cms_index_noRoute>
                 <observers>
-                    <jeroenvermeulen_rewritefix>
+                    <magehost_rewritefix>
                         <type>singleton</type>
-                        <class>jeroenvermeulen_rewritefix/observer</class>
+                        <class>magehost_rewritefix/observer</class>
                         <method>controllerActionPredispatchCmsIndexNoRoute</method>
-                    </jeroenvermeulen_rewritefix>
+                    </magehost_rewritefix>
                 </observers>
             </controller_action_predispatch_cms_index_noRoute>
             <!-- /for Magento pre SUPEE-7405 -->
             <after_reindex_process_catalog_url>
                 <observers>
-                    <jeroenvermeulen_rewritefix>
+                    <magehost_rewritefix>
                         <type>singleton</type>
-                        <class>jeroenvermeulen_rewritefix/observer</class>
+                        <class>magehost_rewritefix/observer</class>
                         <method>afterReindexProcessCatalogUrl</method>
-                    </jeroenvermeulen_rewritefix>
+                    </magehost_rewritefix>
                 </observers>
             </after_reindex_process_catalog_url>
             <adminhtml_block_html_before>
                 <observers>
-                    <jeroenvermeulen_rewritefix>
+                    <magehost_rewritefix>
                         <type>singleton</type>
-                        <class>jeroenvermeulen_rewritefix/observer</class>
+                        <class>magehost_rewritefix/observer</class>
                         <method>adminhtmlBlockHtmlBefore</method>
-                    </jeroenvermeulen_rewritefix>
+                    </magehost_rewritefix>
                 </observers>
             </adminhtml_block_html_before>
         </events>
