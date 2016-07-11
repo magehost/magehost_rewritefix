@@ -20,7 +20,7 @@
             ["app/code/community/MageHost/RewriteFix/", "app/code/community/MageHost/RewriteFix/"],
             ["shell/mh_rewrite_cleanup.php", "shell/mh_rewrite_cleanup.php"]
         ]
-    }
+    },
     "suggest":{
         "magento-hackathon/magento-composer-installer":"Makes it possible to manage this package as a dependency"
     }
