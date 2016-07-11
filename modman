@@ -11,3 +11,5 @@ app/code/community/MageHost/RewriteFix/   app/code/community/MageHost/RewriteFix
 # ---- Shell script to cleanup
 # Magento other                - File          - shell/mh_rewrite_cleanup.php
 shell/mh_rewrite_cleanup.php                     shell/mh_rewrite_cleanup.php
+
+## When you update this file, don't forget composer.json
