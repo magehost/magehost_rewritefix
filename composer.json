@@ -1,5 +1,5 @@
 {
-   "name": "magehost/MageHost_RewriteFix",
+   "name": "magehost/magehost_rewritefix",
     "license": "GPL-3.0",
     "type": "magento-module",
     "version": "1.4.0",
