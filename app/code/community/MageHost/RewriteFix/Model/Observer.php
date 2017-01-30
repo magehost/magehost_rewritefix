@@ -45,7 +45,7 @@ class MageHost_RewriteFix_Model_Observer {
                 $storeId = Mage::app()->getStore()->getId();
                 $rewrite = $urlResource->getRewriteByRequestPath($productUrl, $storeId);
                 if ($rewrite) {
-                    $redirectUrl = '/' . $rewrite->getRequestPath();
+                    $redirectUrl = $baseUrl . '/' . $rewrite->getRequestPath();
                 }
             }
         }
