@@ -1,27 +1,16 @@
 {
-   "name": "magehost/magehost_rewritefix",
-    "license": "GPL-3.0",
-    "type": "magento-module",
-    "version": "1.4.0",
-    "description":"MageHost_RewriteFix",
-    "repositories":[
-    ],
-    "require":{
-    },
-    "authors":[
-        {
-            "name":"MagentoHosting.pro - Jeroen Vermeulen",
-            "email":"info@magehost.pro"
-        }
-    ], 
-    "extra": {
-        "map": [
-            ["app/etc/modules/MageHost_RewriteFix.xml", "app/etc/modules/MageHost_RewriteFix.xml"],
-            ["app/code/community/MageHost/RewriteFix/", "app/code/community/MageHost/RewriteFix/"],
-            ["shell/mh_rewrite_cleanup.php", "shell/mh_rewrite_cleanup.php"]
-        ]
-    },
-    "suggest":{
-        "magento-hackathon/magento-composer-installer":"Makes it possible to manage this package as a dependency"
+  "name": "magehost/magehost_rewritefix",
+  "type": "magento-module",
+  "license": "GPL-3.0",
+  "homepage":"https://github.com/magehost/magehost_rewritefix",
+  "description":"MageHost_RewriteFix: Solves a problem most big ‪#‎Magento‬ 1.x shops face: an ever growing huge URL Rewrite table.",
+  "authors":[
+    {
+      "name":"MagentoHosting.pro - Jeroen Vermeulen",
+      "email":"jeroen@magehost.pro"
     }
+  ],
+  "require":{
+    "magento-hackathon/magento-composer-installer":"*"
+  }
 }
