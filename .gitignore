@@ -1,3 +1,4 @@
 *~
 /.idea/
+/var/connect/*.tgz
 /var/connect/package.xml
