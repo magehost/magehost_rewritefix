@@ -17,13 +17,6 @@ How to install using Modman (--copy)
 1. Run `php shell/mh_rewrite_cleanup.php -- cleanup` once
 1. Reindex the `catalog_url` index
 
-How to install using Composer
-1. composer config repositories.magehost_rewritefix  vcs git@github.com:magehost/magehost_rewritefix.git
-1. composer require magehost/magehost_rewritefix:dev-master --no-update
-1. composer update magehost/magehost_rewritefix
-1. Run `php shell/mh_rewrite_cleanup.php -- cleanup` once
-1. Reindex the `catalog_url` index
-
 You can verify if your installation has this problem by using this query (presuming no DB prefix). If the largest count is > the number of stores then this is a hint that something is wrong. 
 
 ```
