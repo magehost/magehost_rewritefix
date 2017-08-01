@@ -7,7 +7,7 @@ Due to bugs in Magento, once an rewrite URL ends with -[number] you get more and
 This extension is a workaround for this problem.
 Requires Magento 1.7.0.2 or greater.
 
-How to install using Modman (--copy)
+#### How to install using Modman (--copy)
 1. Make sure you run Magento 1.7 or newer 
 1. Install [Modman](https://github.com/colinmollenhour/modman)
 1. `cd` to your Magento root dir
@@ -17,6 +17,7 @@ How to install using Modman (--copy)
 1. Run `php shell/mh_rewrite_cleanup.php -- cleanup` once
 1. Reindex the `catalog_url` index
 
+#### Verify if needed
 You can verify if your installation has this problem by using this query (presuming no DB prefix). If the largest count is > the number of stores then this is a hint that something is wrong. 
 
 ```
