@@ -7,15 +7,22 @@ Due to bugs in Magento, once an rewrite URL ends with -[number] you get more and
 This extension is a workaround for this problem.
 Requires Magento 1.7.0.2 or greater.
 
-How to use:
+How to install using Modman (--copy)
 1. Make sure you run Magento 1.7 or newer 
-* Install [Modman](https://github.com/colinmollenhour/modman)
-* `cd` to your Magento root dir
-* `test -d .modman || modman init`
-* `modman clone --copy --force https://github.com/magehost/magehost_rewritefix`
-* If you keep your Magento code in Git: Add `.modman` to your `.gitignore`
-* Run `php shell/mh_rewrite_cleanup.php -- cleanup` once
-* Reindex the `catalog_url` index
+1. Install [Modman](https://github.com/colinmollenhour/modman)
+1. `cd` to your Magento root dir
+1. `test -d .modman || modman init`
+1. `modman clone --copy --force https://github.com/magehost/magehost_rewritefix`
+1. If you keep your Magento code in Git: Add `.modman` to your `.gitignore`
+1. Run `php shell/mh_rewrite_cleanup.php -- cleanup` once
+1. Reindex the `catalog_url` index
+
+How to install using Composer
+1. composer config repositories.magehost_rewritefix  vcs git@github.com:magehost/magehost_rewritefix.git
+1. composer require magehost/magehost_rewritefix:dev-master --no-update
+1. composer update magehost/magehost_rewritefix
+1. Run `php shell/mh_rewrite_cleanup.php -- cleanup` once
+1. Reindex the `catalog_url` index
 
 You can verify if your installation has this problem by using this query (presuming no DB prefix). If the largest count is > the number of stores then this is a hint that something is wrong. 
 
