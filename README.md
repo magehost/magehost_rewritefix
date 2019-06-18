@@ -18,17 +18,16 @@ Requires Magento 1.7.0.2 or greater.
 1. Reindex the `catalog_url` index
 
 #### Verify if needed
-You can verify if your installation has this problem by using this query (presuming no DB prefix). If the largest count is > the number of stores then this is a hint that something is wrong. 
+You can verify if your installation has this problem by using this query (presuming no DB prefix). If the largest count is > the number of store views then this is a hint that something is wrong. 
 
-```
-SELECT id_path, count(*) as total
+```sql
+SELECT `id_path`, COUNT(*) as `total`
 FROM `core_url_rewrite`
-group by id_path
-order by total desc
-LIMIT 50
+GROUP BY `id_path`
+ORDER BY `total` DESC
 ```
 
-Also you can open the id_path with the highest count `select * where id_path = [ID from previous query]`
+For deeper investigation you can inspect the rows with the highest count using ```SELECT * FROM `core_url_rewrite` WHERE `id_path`='[id_path from previous query]'```
 There should be 1 entry per id_path for every store view - and not more - unless you renamed the product URI yourself. 
 
 
