@@ -76,20 +76,23 @@ class MageHost_RewriteFix_Model_Observer {
         $stores = Mage::app()->getStores( true );
         $helper = Mage::helper( 'magehost_rewritefix' );
         /** @var Mage_Core_Model_Store $store */
+        $allStores = true;
         foreach ( $stores as $store ) {
             if ( ! Mage::getStoreConfigFlag( 'catalog/seo/product_use_categories', $store->getId() ) ) {
                 $cleanForIds[] = intval($store->getId());
+            } else {
+                $allStores = false;
             }
         }
         if ( !empty($cleanForIds) ) {
             $writeAdapter = Mage::getSingleton('core/resource')->getConnection('core_write');
             $table = Mage::getResourceModel('core/url_rewrite')->getMainTable();
             $sql = sprintf( 'DELETE FROM %s
-                             WHERE `store_id` IN (%s)
+                             WHERE %s
                              AND `category_id` IS NOT NULL
                              AND `product_id` IS NOT NULL',
                             $writeAdapter->quoteIdentifier($table),
-                            $writeAdapter->quote($cleanForIds) );
+                            $allStores ? '1' : sprintf('`store_id` IN (%s)', $writeAdapter->quote($cleanForIds) ) );
             $stmt = $writeAdapter->query( $sql );
             $count = $stmt->rowCount();
             if ( $count ) {
